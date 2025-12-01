@@ -6,19 +6,23 @@ import Content from '../components/layout/Content'
 
 import { DataContext, data } from '../data/DataContext'
 import { useState } from 'react'
+import Store from '../data/Store'
 
 const App = () => {
     const [state, setState] = useState(data)
 
     return (
-        <DataContext.Provider value={{state, setState}}>
+        <Store>
+            <DataContext.Provider value={{ state, setState }}>
                 <div className="App">
                     <BrowserRouter>
                         <Menu />
                         <Content />
                     </BrowserRouter>
                 </div>
-        </DataContext.Provider>
+            </DataContext.Provider>
+        </Store>
+
     )
 }
 
