@@ -1,23 +1,8 @@
 import { useReducer } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 
-const initialState = {
-    cart: [],
-    products: [],
-    user: null,
-    number: 0
-}
-
-function reducer(state, action) {
-    switch(action.type) {
-        case 'numberAdd2':
-            return {...state, number: state.number + 2}
-        case 'login':
-            return {...state, user: {name: action.payload}}
-        default:
-            return state
-    }
-}
+import { initialState, reducer } from '../../store'
+import {numberAdd2, numberMultiply7, numberDivide25, numberParseInt, numberAddN, login } from '../../store/actions'
 
 const UseReducer = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -38,12 +23,28 @@ const UseReducer = (props) => {
                 <span className="text">{state.number}</span>
                 <div>
                     <button className="btn" 
-                        onClick={() => dispatch({type: 'login', payload: 'Maria'})}>
+                        onClick={() => login(dispatch, 'Iury')}>
                         Login
                     </button>
                     <button className="btn" 
-                        onClick={() => dispatch({type: 'numberAdd2'})}>
+                        onClick={() => numberAdd2(dispatch)}>
                         +2
+                    </button>
+                    <button className="btn" 
+                        onClick={() => numberMultiply7(dispatch)}>
+                        *7
+                    </button>
+                    <button className="btn" 
+                        onClick={() => numberDivide25(dispatch)}>
+                        Divide por 25
+                    </button>
+                    <button className="btn" 
+                        onClick={() => numberParseInt(dispatch)}>
+                        Converte para inteiro
+                    </button>
+                    <button className="btn" 
+                        onClick={() => numberAddN(dispatch, 15)}>
+                        Add número
                     </button>
                 </div>
             </div>
